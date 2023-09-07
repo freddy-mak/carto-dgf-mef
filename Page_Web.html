@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINISTERE DES EAUX ET FORETS</title>
+    <style>
+        /* Styles CSS (inchangés) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Empêche la barre de défilement horizontale */
+            max-width: 100%; /* La page s'adapte à la largeur de l'écran */
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        header img {
+            max-width: 75px; /* Le logo s'adapte à la largeur de l'écran */
+            height: auto; /* Garantit que la hauteur s'ajuste automatiquement proportionnellement à la largeur */
+        }
+        header h1 {
+            font-size: 24px; /* Ajustez la taille de la police en fonction de vos besoins */
+            margin: 0;
+            text-align: center; /* Centrer le texte horizontalement */
+        }
+        nav {
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+        nav li {
+            margin: 0 5px;
+            position: relative;
+        }
+        nav li:hover ul {
+            display: block;
+        }
+        nav ul ul {
+            display: none;
+            position: absolute;
+            background-color: #eee;
+            list-style: none;
+            padding: 0;
+        }
+        nav ul ul li {
+            margin: 0;
+        }
+        /* Ajoutez cette règle CSS pour réduire la taille de la police des sous-titres */
+        #sous-titres li a {
+            font-size: 10px; /* Ajustez la taille de la police selon vos préférences */
+        }
+        .slideshow-container {
+            width: 75%; /* Ajuster la largeur du diaporama à 100% */
+            height: 75%; /* Laisser la hauteur s'ajuster automatiquement */
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: center; /* Centrer les diapositives horizontalement */
+        }
+        .slideshow-container img {
+            max-width: 75%; /* Ajuster la largeur de l'image à 100% */
+            height: 75%; /* Garantir la proportionnalité de la hauteur */
+            display: none;
+            margin: 0 auto;/* Centrer l'image horizontalement */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQqlANQtBX69WvIFNeWEA-kHdEj9klR-g8Af0Z-q3Nbc9pj0g3s" alt="Logo">
+        <h1>MINISTERE DES EAUX ET FORETS</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li>
+                    <a href="#" id="carte-interactive">Carte Interactive</a>
+                    <ul id="sous-titres" style="display: none;">
+                        <li><a href="https://my.gfw-mapbuilder.org/v1.latest/?appid=12f06a7a70f94fc080d14891d1664e99">Aménagement forestier</a></li>
+                        <li><a href="#">Unité de transformation</a></li>
+                        <li><a href="#">Permis forestier</a></li>
+                    </ul>
+                </li>
+                <!-- Les autres éléments de la navigation restent inchangés -->
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Diaporama de la page d'accueil (corrigé) -->
+    <div class="slideshow-container">
+        <img class="slide" src="https://wri-sites.s3.amazonaws.com/forest-atlas.org/gab.forest-atlas.org/img/climate.PNG?auto=compress&cs=tinysrgb&dpr=2&h=300&w=940" alt="Image 1">
+        <img class="slide" src="https://wri-sites.s3.amazonaws.com/forest-atlas.org/gab.forest-atlas.org/img/foret_gabon.PNG?auto=compress&cs=tinysrgb&dpr=2&h=300&w=940" alt="Image 2">
+        <img class="slide" src="https://wri-sites.s3.amazonaws.com/forest-atlas.org/gab.forest-atlas.org/img/foretgabon.JPG?auto=compress&cs=tinysrgb&dpr=3&h=300&w=940" alt="Image 3">
+    </div>
+    
+    <!-- Contenu de la page ici (inchangé) -->
+    
+    <script>
+        // JavaScript pour le diaporama et les sous-titres
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".slide");
+
+        function showSlide(n) {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].style.display = "inline-block";
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        const carteInteractive = document.getElementById("carte-interactive");
+        const sousTitres = document.getElementById("sous-titres");
+
+        carteInteractive.addEventListener("click", function () {
+            if (sousTitres.style.display === "none" || sousTitres.style.display === "") {
+                sousTitres.style.display = "block";
+            } else {
+                sousTitres.style.display = "none";
+            }
+        });
+
+        window.onload = function () {
+            showSlide(currentSlide);
+            setInterval(nextSlide, 3000); // Changement de diapositive toutes les 3 secondes
+        };
+    </script>
+</body>
+</html>
